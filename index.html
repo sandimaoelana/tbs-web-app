@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengelolaan TBS Dump Truck</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 10px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Pengelolaan TBS Dump Truck</h1>
+  
+  <form id="tbsForm">
+    <label for="weight">Berat TBS (kg):</label>
+    <input type="number" id="weight" required><br><br>
+    
+    <label for="driver">Nama Sopir:</label>
+    <input type="text" id="driver" required><br><br>
+    
+    <label for="truck">Nomor Dump Truck:</label>
+    <input type="text" id="truck" required><br><br>
+    
+    <button type="submit">Tambah Pengiriman</button>
+  </form>
+  
+  <h2>Data Pengiriman</h2>
+  <table id="tbsTable">
+    <thead>
+      <tr>
+        <th>Berat TBS (kg)</th>
+        <th>Sopir</th>
+        <th>Dump Truck</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data pengiriman akan ditambahkan di sini -->
+    </tbody>
+  </table>
+  
+  <script>
+    const form = document.getElementById('tbsForm');
+    const table = document.getElementById('tbsTable').getElementsByTagName('tbody')[0];
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const weight = document.getElementById('weight').value;
+      const driver = document.getElementById('driver').value;
+      const truck = document.getElementById('truck').value;
+      
+      const newRow = table.insertRow();
+      newRow.innerHTML = `
+        <td>${weight}</td>
+        <td>${driver}</td>
+        <td>${truck}</td>
+        <td><button onclick="deleteRow(this)">Hapus</button></td>
+      `;
+      
+      form.reset(); // Reset form setelah data dimasukkan
+    });
+
+    function deleteRow(button) {
+      const row = button.closest('tr');
+      row.remove();
+    }
+  </script>
+</body>
+</html>
